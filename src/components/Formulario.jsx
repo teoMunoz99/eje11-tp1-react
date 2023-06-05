@@ -13,19 +13,22 @@ const Formulario = () => {
 
 
   useEffect(() => {
-    consultarAPI();
-  }, []);
+    if(categoria){
+      consultarAPI();
+    }
+  }, [categoria]);
 
   const consultarAPI = async () => {
     //realizo la peticion get a la api de noticias
     try {
-      const respuesta = await fetch("https://saurav.tech/NewsAPI/top-headlines/category/health/in.json");
+      const respuesta = await fetch(`https://saurav.tech/NewsAPI/top-headlines/category/${categoria}/in.json`);
       const datos = await respuesta.json();
       setNoticia(datos.articles);
     } catch (error) {
       console.log(error);
     }
   };
+
 
   return (
     <Container className="p-4">
